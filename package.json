@@ -1,0 +1,18 @@
+{
+  "name": "emporia-carski-vinogradi",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "EMPORIA — Vinarija Carski Vinogradi, Mostar. The 1886 Imperial Vineyards brochure as an immersive web experience.",
+  "scripts": {
+    "start": "npx --yes serve -l 8080 .",
+    "serve": "python3 -m http.server 8080",
+    "build:static": "node tools/build-static.mjs",
+    "audit": "node tools/audit.mjs",
+    "qa": "node tools/qa.mjs",
+    "a11y": "node tools/a11y.mjs",
+    "gl": "node tools/glcheck.mjs",
+    "shots": "node tools/shots.mjs --gl --tag=desk"
+  },
+  "devDependencies": { "playwright": "^1.49.0" }
+}

@@ -1,0 +1,59 @@
+═════════════════════════════════════════════════════════════════════
+  EMPORIA — CONTENT COMPLETENESS AUDIT
+  Source: emporiawine_2.pdf, 16 pages   ·   Target: the built site
+  Run: 2026-08-20 10:37
+═════════════════════════════════════════════════════════════════════
+
+── 1 · BLOCK CHECK — every PDF paragraph, contiguous on the page ────
+   PDF blocks (≥4 words, page-scoped) : 117
+   Verbatim & contiguous at 1440px    : 116
+   Present but re-flowed (§72)        : 1   — every word present, in order,
+                                              with site headings interleaved
+   MISSING desktop / mobile           : 0 / 0
+
+   Re-flowed blocks (not gaps):
+   ~ p16: mostar hp investing d.o.o…
+
+── 2 · TOKEN CHECK — every word, number, %, °C in the PDF ───────────
+   Distinct PDF tokens                : 838
+   MISSING desktop / mobile           : 0 / 0
+
+── 3 · COUNTS ───────────────────────────────────────────────────────
+   Wines (§76)                        PDF   9   site   9   ✓
+   Spirits                            PDF   2   site   2   ✓
+   ID cards                           PDF  11   site  11   ✓
+   Medals (§75)                       PDF   3   site   3   ✓
+   Historic honours                   PDF   2   site   2   ✓
+   Wines on mobile (§78)              PDF   9   site   9   ✓
+   ID cards on mobile (§78)           PDF  11   site  11   ✓
+
+── 4 · IMAGES (§74) ─────────────────────────────────────────────────
+   Images embedded in the PDF         : 43
+   Excluded, each with a reason       : 3
+      · extracted/p05_x18.png (2x373 px sliver - degenerate spacer artifact)
+      · extracted/p05_x20.png (2x605 px sliver - degenerate spacer artifact)
+      · extracted/p16_x269.png (byte-identical duplicate of p01_x269 gold texture)
+   Assets shipped                     : 47
+   Referenced by the built page       : 47
+   Shipped but unreferenced           : 0
+
+   RESULT: COMPLETE.
+   Every block, every token, every wine, every award and every image of
+   the source PDF is present on the site, at desktop and at phone width.
+═════════════════════════════════════════════════════════════════════
+
+  Editorial notes recorded during transcription
+  ────────────────────────────────────────────
+  · Hyphens introduced by the PDF's line-wrapping were rejoined
+    (in-spired → inspired, reflecti-on → reflection, SELE-CTION →
+    SELECTION, and so on). Two breaks fall on genuinely hyphenated
+    words and were kept as printed: "open-mindedness" and "world-wide".
+  · The source's own spellings are preserved verbatim, including
+    "relaying", "form the shadow", "craddle", "Fermetation",
+    "noticable" and "harmonius". Nothing was silently corrected.
+  · Page 15 states EMPORIA Cherry at 27% and Loza Specijal at 40% in
+    its ID cards, while the bottle labels photographed on the same page
+    read 20% and 42%. The site follows the ID-card figures, which are
+    the PDF's stated data; the label photographs are reproduced
+    unaltered, so both remain visible. Flagged for the client to
+    confirm — [PDF CONTENT REQUIRES VERIFICATION].

@@ -1,0 +1,236 @@
+/* =============================================================================
+   BASE — reset, document, typography primitives, utilities
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;              /* Lenis owns scrolling               */
+}
+
+body {
+  font-family: var(--f-ui);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--parchment);
+  background: var(--deep-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+}
+
+body.is-loading { overflow: hidden; height: 100vh; }
+
+img, picture, video, canvas { display: block; max-width: 100%; }
+img { height: auto; }
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+ul, ol { list-style: none; }
+
+::selection { background: rgb(var(--accent-rgb) / 0.9); color: var(--deep-black); }
+
+/* ── Focus: always visible, never removed (§41) ───────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ── Skip link ────────────────────────────────────────────────────────────── */
+.skip-link {
+  position: fixed; top: 0; left: 50%; transform: translate(-50%, -120%);
+  z-index: 1200; padding: 0.9rem 1.6rem; background: var(--emporia-gold);
+  color: var(--deep-black); font-size: var(--fs-meta);
+  letter-spacing: var(--tr-meta); text-transform: uppercase;
+  transition: transform var(--t-ui) var(--e-out);
+}
+.skip-link:focus { transform: translate(-50%, 0); }
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ── Typographic primitives ───────────────────────────────────────────────── */
+.t-display {
+  font-family: var(--f-display);
+  font-weight: 300;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.015em;
+}
+.t-chapter {
+  font-family: var(--f-display);
+  font-size: var(--fs-chapter);
+  font-weight: 300;
+  line-height: var(--lh-snug);
+  letter-spacing: -0.02em;
+}
+.t-script { font-family: var(--f-script); font-weight: 400; line-height: 1.25; }
+.t-meta {
+  font-size: var(--fs-meta);
+  letter-spacing: var(--tr-meta);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgb(255 255 255 / 0.5);
+}
+.t-lead { font-size: var(--fs-lead); line-height: 1.5; font-weight: 300; }
+.t-body p + p { margin-top: 1.05em; }
+.t-body { max-width: var(--measure); color: rgb(241 236 226 / 0.78); }
+.t-accent { color: var(--accent); }
+
+/* Word-spaced imperial wordmark, exactly as the brochure sets it */
+.wordmark { letter-spacing: 0.34em; text-indent: 0.34em; font-weight: 400; }
+
+/* ── Layout primitives ────────────────────────────────────────────────────── */
+.chapter { position: relative; padding: var(--s-8) 0; isolation: isolate; }
+.wrap { width: 100%; padding-inline: var(--gutter); margin-inline: auto; max-width: 1760px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: var(--col-gap);
+}
+.bleed { width: 100%; }
+
+/* ── Chapter marker: the running folio in the left margin ─────────────────── */
+.chapter-mark {
+  position: absolute; top: var(--s-6); left: var(--gutter);
+  display: flex; align-items: center; gap: 0.9rem;
+  font-size: var(--fs-meta); letter-spacing: var(--tr-meta);
+  text-transform: uppercase; color: rgb(255 255 255 / 0.42); z-index: 3;
+}
+.chapter-mark::before {
+  content: ''; width: clamp(28px, 5vw, 84px); height: 1px;
+  background: var(--accent); transform-origin: left;
+}
+.chapter-mark b { color: var(--accent); font-weight: 500; }
+
+/* ── Film grain (§53) — one fixed layer, extremely subtle ─────────────────── */
+.grain {
+  position: fixed; inset: -60px; z-index: var(--z-grain);
+  pointer-events: none; opacity: 0.05; mix-blend-mode: overlay;
+  background-image: var(--grain-url);
+  background-size: 180px 180px;
+  animation: grainShift 900ms steps(4) infinite;
+  will-change: transform;
+}
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-14px, 8px); }
+  50%  { transform: translate(9px, -13px); }
+  75%  { transform: translate(-6px, -6px); }
+  100% { transform: translate(0, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .grain { animation: none; } }
+
+/* ── Reveal primitives, driven by IntersectionObserver ────────────────────── */
+[data-reveal] { will-change: transform, opacity; }
+
+[data-reveal='up']      { opacity: 0; transform: translateY(38px); }
+[data-reveal='fade']    { opacity: 0; }
+[data-reveal='wipe-up'] { clip-path: inset(100% 0 0 0); }
+[data-reveal='wipe-dn'] { clip-path: inset(0 0 100% 0); }
+[data-reveal='iris']    { clip-path: circle(0% at 50% 55%); }
+[data-reveal='curtain'] { clip-path: inset(0 0 0 100%); }
+[data-reveal='scale']   { opacity: 0; transform: scale(1.12); }
+[data-reveal='blur']    { opacity: 0; filter: blur(18px); transform: scale(1.03); }
+[data-reveal='rot']     { opacity: 0; transform: perspective(1400px) rotateX(14deg) translateY(46px); transform-origin: 50% 100%; }
+
+.is-in[data-reveal='up'],
+.is-in[data-reveal='fade'],
+.is-in[data-reveal='scale'],
+.is-in[data-reveal='blur'],
+.is-in[data-reveal='rot'] { opacity: 1; transform: none; filter: none; }
+.is-in[data-reveal='wipe-up'],
+.is-in[data-reveal='wipe-dn'],
+.is-in[data-reveal='curtain'] { clip-path: inset(0 0 0 0); }
+.is-in[data-reveal='iris'] { clip-path: circle(78% at 50% 55%); }
+
+[data-reveal] {
+  transition:
+    opacity var(--t-section) var(--e-out) var(--reveal-delay, 0ms),
+    transform var(--t-cinematic) var(--e-power) var(--reveal-delay, 0ms),
+    clip-path var(--t-cinematic) var(--e-cine) var(--reveal-delay, 0ms),
+    filter var(--t-section) var(--e-out) var(--reveal-delay, 0ms);
+}
+
+/* Split-text characters and lines */
+.split-line { display: block; overflow: hidden; }
+.split-line > span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform var(--t-cinematic) var(--e-power) var(--line-delay, 0ms);
+}
+.is-in .split-line > span { transform: translateY(0); }
+
+.split-char {
+  display: inline-block;
+  opacity: 0; transform: translateY(0.5em) rotate(4deg);
+  transition: opacity 620ms var(--e-out) var(--char-delay, 0ms),
+              transform 900ms var(--e-power) var(--char-delay, 0ms);
+}
+.is-in .split-char { opacity: 1; transform: none; }
+
+/* ── Rules that draw themselves ───────────────────────────────────────────── */
+.rule-draw {
+  height: 1px; background: currentColor; opacity: 0.35;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--t-cinematic) var(--e-cine);
+}
+.is-in .rule-draw, .rule-draw.is-in { transform: scaleX(1); }
+
+/* Dashed gold rule — the brochure's own separator between copy and ID card */
+.rule-dashed {
+  height: 0; border-top: 1px dashed rgb(var(--accent-rgb) / 0.55);
+  width: 100%;
+}
+
+/* ── Media plate: a photograph with its own inner parallax ────────────────── */
+.plate { position: relative; overflow: hidden; background: var(--cellar-black); }
+.plate img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+.plate figcaption {
+  position: absolute; left: 0; bottom: 0; padding: var(--s-2) var(--s-3);
+  font-size: var(--fs-meta); letter-spacing: var(--tr-meta); text-transform: uppercase;
+  color: rgb(255 255 255 / 0.82);
+  text-shadow: 0 2px 20px rgb(0 0 0 / 0.8);
+}
+
+/* ── Buttons / magnetic CTA (§32) ─────────────────────────────────────────── */
+.btn {
+  --btn-pad: 1.05rem 2.4rem;
+  position: relative; display: inline-flex; align-items: center; gap: 0.8rem;
+  padding: var(--btn-pad);
+  border: 1px solid rgb(var(--accent-rgb) / 0.5);
+  font-size: var(--fs-meta); letter-spacing: var(--tr-meta); text-transform: uppercase;
+  color: var(--parchment); overflow: hidden; isolation: isolate;
+  transition: color var(--t-ui) var(--e-out), border-color var(--t-ui) var(--e-out);
+}
+.btn::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: var(--accent); transform: translateY(101%);
+  transition: transform var(--t-ui) var(--e-power);
+}
+.btn:hover { color: var(--deep-black); border-color: var(--accent); }
+.btn:hover::before { transform: translateY(0); }
+
+/* ── Scroll cue ───────────────────────────────────────────────────────────── */
+.scroll-cue {
+  display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+  font-size: var(--fs-meta); letter-spacing: var(--tr-meta); text-transform: uppercase;
+  color: rgb(255 255 255 / 0.55);
+}
+.scroll-cue i {
+  display: block; width: 1px; height: 62px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: cueDrop 2.4s var(--e-inout) infinite;
+  transform-origin: top;
+}
+@keyframes cueDrop {
+  0%   { transform: scaleY(0); opacity: 0; }
+  35%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1) translateY(62px); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .scroll-cue i { animation: none; } }

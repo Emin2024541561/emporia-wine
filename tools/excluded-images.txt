@@ -1,0 +1,3 @@
+extracted/p05_x18.png (2x373 px sliver - degenerate spacer artifact)
+extracted/p05_x20.png (2x605 px sliver - degenerate spacer artifact)
+extracted/p16_x269.png (byte-identical duplicate of p01_x269 gold texture)

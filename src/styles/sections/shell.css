@@ -1,0 +1,197 @@
+/* =============================================================================
+   SHELL — loader, navigation, menu overlay, cursor, chapter progress rail
+   ========================================================================== */
+
+/* ── 1. LOADER (§37): a drop of wine forms, swells, and floods the screen ─── */
+.loader {
+  position: fixed; inset: 0; z-index: var(--z-loader);
+  background: var(--deep-black);
+  display: grid; place-items: center;
+  transition: opacity 600ms var(--e-out);
+}
+.loader__inner { display: grid; place-items: center; gap: var(--s-4); }
+
+.loader__drop { width: min(46vw, 260px); aspect-ratio: 1; position: relative; }
+.loader__drop svg { width: 100%; height: 100%; overflow: visible; }
+.loader__ring { fill: none; stroke: rgb(255 255 255 / 0.1); stroke-width: 0.6; }
+.loader__arc {
+  fill: none; stroke: var(--emporia-gold); stroke-width: 0.9; stroke-linecap: round;
+  transform: rotate(-90deg); transform-origin: 50% 50%;
+  transition: stroke-dashoffset 320ms var(--e-out);
+}
+/* the wine that fills the drop */
+.loader__fill { transition: transform 420ms var(--e-out); transform-origin: 50% 100%; }
+
+.loader__mark { position: absolute; inset: 22%; display: grid; place-items: center; }
+.loader__mark img { width: 100%; opacity: 0.9; }
+
+.loader__meta {
+  display: flex; align-items: baseline; gap: 1.4rem;
+  font-size: var(--fs-meta); letter-spacing: var(--tr-meta); text-transform: uppercase;
+  color: rgb(255 255 255 / 0.45);
+}
+.loader__pct { font-family: var(--f-display); font-size: 2.2rem; letter-spacing: 0; color: var(--emporia-gold); }
+.loader__word { overflow: hidden; }
+.loader__word span { display: block; }
+
+/* the flood-out: a burgundy liquid curtain wipes the loader away */
+.loader__flood {
+  position: fixed; inset: 0; z-index: calc(var(--z-loader) + 1);
+  background: linear-gradient(160deg, #4A0F1E 0%, #2A0812 55%, #120407 100%);
+  clip-path: inset(100% 0 0 0);
+  pointer-events: none;
+}
+
+/* ── 2. NAVIGATION ────────────────────────────────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-nav);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: clamp(1rem, 2vw, 1.8rem) var(--gutter);
+  mix-blend-mode: normal;
+  transition: background var(--t-ui) var(--e-out), backdrop-filter var(--t-ui),
+              transform 620ms var(--e-power), padding var(--t-ui) var(--e-out);
+}
+.nav.is-solid {
+  background: rgb(12 10 11 / 0.72);
+  backdrop-filter: blur(18px) saturate(1.1);
+  border-bottom: var(--rule);
+  padding-block: clamp(0.7rem, 1.2vw, 1rem);
+}
+.nav.is-hidden { transform: translateY(-102%); }
+
+.nav__brand { display: flex; align-items: center; gap: 0.85rem; }
+.nav__brand img { width: clamp(30px, 3.4vw, 42px); height: auto; }
+.nav__brand span {
+  font-size: clamp(0.78rem, 1vw, 0.95rem);
+  letter-spacing: 0.36em; text-indent: 0.36em; color: var(--parchment);
+}
+
+.nav__links { display: flex; align-items: center; gap: clamp(1.1rem, 2.2vw, 2.4rem); }
+.nav__link {
+  position: relative; font-size: var(--fs-meta);
+  letter-spacing: var(--tr-nav); text-transform: uppercase;
+  color: rgb(241 236 226 / 0.62);
+  transition: color var(--t-ui) var(--e-out);
+  padding-block: 0.4rem;
+}
+.nav__link::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px;
+  background: var(--accent); transform: scaleX(0); transform-origin: right;
+  transition: transform var(--t-ui) var(--e-power);
+}
+.nav__link:hover, .nav__link.is-current { color: var(--parchment); }
+.nav__link:hover::after, .nav__link.is-current::after { transform: scaleX(1); transform-origin: left; }
+
+.nav__toggle {
+  display: none; width: 46px; height: 46px; position: relative;
+  border: 1px solid rgb(255 255 255 / 0.2);
+}
+.nav__toggle i {
+  position: absolute; left: 25%; width: 50%; height: 1px; background: var(--parchment);
+  transition: transform var(--t-ui) var(--e-power), opacity var(--t-micro);
+}
+.nav__toggle i:nth-child(1) { top: 40%; }
+.nav__toggle i:nth-child(2) { top: 60%; }
+.is-menu-open .nav__toggle i:nth-child(1) { transform: translateY(4.6px) rotate(45deg); }
+.is-menu-open .nav__toggle i:nth-child(2) { transform: translateY(-4.6px) rotate(-45deg); }
+
+/* ── 3. MENU OVERLAY — full-screen imperial index ─────────────────────────── */
+.menu {
+  position: fixed; inset: 0; z-index: var(--z-overlay);
+  background: var(--cellar-black);
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1000ms var(--e-cine);
+  display: grid; grid-template-rows: auto 1fr auto;
+  padding: clamp(5rem, 10vh, 8rem) var(--gutter) var(--s-5);
+  overflow-y: auto;
+}
+.is-menu-open .menu { clip-path: inset(0 0 0 0); }
+.menu[aria-hidden='true'] { pointer-events: none; }
+.is-menu-open .menu[aria-hidden='false'] { pointer-events: auto; }
+
+.menu__list { display: flex; flex-direction: column; justify-content: center; gap: 0.1em; }
+.menu__item { overflow: hidden; }
+.menu__item a {
+  display: flex; align-items: baseline; gap: 1.2rem;
+  font-family: var(--f-display); font-weight: 300;
+  font-size: clamp(2.2rem, 7.5vw, 6.5rem); line-height: 1.05;
+  color: rgb(241 236 226 / 0.9);
+  transform: translateY(110%);
+  transition: transform 900ms var(--e-power) var(--d, 0ms), color var(--t-ui) var(--e-out);
+}
+.is-menu-open .menu__item a { transform: translateY(0); }
+.menu__item a:hover { color: var(--emporia-gold); }
+.menu__item em {
+  font-family: var(--f-ui); font-style: normal; font-size: var(--fs-meta);
+  letter-spacing: var(--tr-meta); color: var(--emporia-gold); opacity: 0.75;
+}
+.menu__foot {
+  display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5);
+  border-top: var(--rule); padding-top: var(--s-3);
+  font-size: var(--fs-small); color: rgb(241 236 226 / 0.62);
+}
+
+/* ── 4. CUSTOM CURSOR (§31) — desktop, fine pointer only ──────────────────── */
+.cursor {
+  position: fixed; top: 0; left: 0; z-index: var(--z-cursor);
+  pointer-events: none; mix-blend-mode: difference;
+  display: none;
+}
+.cursor__dot {
+  position: absolute; width: 7px; height: 7px; border-radius: 50%;
+  background: #fff; transform: translate(-50%, -50%);
+}
+.cursor__ring {
+  position: absolute; width: 42px; height: 42px; border-radius: 50%;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  transform: translate(-50%, -50%);
+  transition: width 320ms var(--e-power), height 320ms var(--e-power),
+              border-color 320ms, background 320ms;
+  display: grid; place-items: center;
+}
+.cursor__label {
+  font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: #fff; opacity: 0; transition: opacity 220ms;
+  white-space: nowrap;
+}
+.cursor.is-active .cursor__ring { width: 84px; height: 84px; background: rgb(255 255 255 / 0.08); }
+.cursor.is-active .cursor__label { opacity: 1; }
+.cursor.is-hidden { opacity: 0; }
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor { display: block; }
+  body.has-cursor, body.has-cursor * { cursor: none; }
+  body.has-cursor a:focus-visible, body.has-cursor button:focus-visible { cursor: auto; }
+}
+
+/* ── 5. CHAPTER PROGRESS RAIL — right margin, desktop ─────────────────────── */
+.rail {
+  position: fixed; right: calc(var(--gutter) * 0.45); top: 50%;
+  transform: translateY(-50%); z-index: var(--z-nav);
+  display: flex; flex-direction: column; gap: 0.85rem; align-items: flex-end;
+}
+.rail__item { display: flex; align-items: center; gap: 0.7rem; }
+.rail__item span {
+  font-size: 0.58rem; letter-spacing: var(--tr-meta); text-transform: uppercase;
+  color: rgb(255 255 255 / 0.4); opacity: 0;
+  transform: translateX(6px);
+  transition: opacity var(--t-ui), transform var(--t-ui) var(--e-out);
+}
+.rail__item i {
+  display: block; width: 22px; height: 1px; background: rgb(255 255 255 / 0.28);
+  transition: width var(--t-ui) var(--e-power), background var(--t-ui);
+}
+.rail__item.is-current i { width: 44px; background: var(--accent); }
+.rail__item:hover span, .rail__item:focus-visible span { opacity: 1; transform: none; }
+.rail__item:hover i { background: var(--accent); }
+.rail__item span {
+  background: rgb(12 10 11 / 0.82); padding: 0.25rem 0.5rem;
+  backdrop-filter: blur(6px);
+}
+@media (max-width: 1100px) { .rail { display: none; } }
+
+/* ── 6. LIQUID CHAPTER TRANSITION (§15) ───────────────────────────────────── */
+.liquid-veil {
+  position: fixed; inset: 0; z-index: var(--z-overlay);
+  pointer-events: none; opacity: 0;
+}

@@ -1,0 +1,108 @@
+/* =============================================================================
+   EMPORIA — DESIGN TOKENS
+   Every colour below is sampled from the supplied PDF's own vector fills and
+   artwork. Nothing here is invented: #231F20 is the brochure's black, #BB9350
+   its gold band, #6B8438 the Žilavka Limited Edition green, #602A39 the
+   Blatina Limited Edition burgundy, #C41C3E the Vranac crimson, #EF712E the
+   Rosé Saumon orange, and so on.
+   ========================================================================== */
+
+:root {
+  /* ── Core palette ─────────────────────────────────────────────────────── */
+  --imperial-black:  #231F20;   /* PDF fill, every wine page                 */
+  --cellar-black:    #171415;
+  --deep-black:      #0C0A0B;
+  --emporia-gold:    #BB9350;   /* PDF fill, the gold brush band             */
+  --gold-light:      #D6B57C;
+  --gold-deep:       #8C6A34;
+  --parchment:       #F1ECE2;
+  --ivory:           #FAF7F1;
+  --paper-grey:      #A5A7AA;   /* PDF fill, About Us page background           */
+  --steel:           #B4B6B8;   /* PDF fill, cuvée pages                     */
+
+  /* ── Wine accents, one per product, all PDF-derived ───────────────────── */
+  --acc-zilavka:      #BB9350;
+  --acc-blatina:      #B01E3D;
+  --acc-zilavka-le:   #6B8438;
+  --acc-blatina-le:   #602A39;
+  --acc-vranac:       #C41C3E;
+  --acc-saumon:       #EF712E;
+  --acc-white-mist:   #9BCB42;
+  --acc-deep-red:     #ED1C24;
+  --acc-white-sel:    #E8862B;
+  --acc-cherry:       #BD1E37;
+  --acc-loza:         #B98A4F;
+
+  /* Live chapter accent — animated as the visitor moves through the story  */
+  --accent: var(--emporia-gold);
+  --accent-rgb: 187 147 80;
+
+  /* ── Chapter atmospheres (§54 lighting / §55 colour progression) ───────── */
+  --atm-hero:    #100E0E;
+  --atm-history: #14100F;
+  --atm-about:   #1A1718;
+  --atm-terroir: #12170F;   /* vineyard green-black  */
+  --atm-estate:  #0F0D0D;
+  --atm-wines:   #0C0A0B;
+  --atm-awards:  #0A0809;
+  --atm-contact: #0B0909;
+
+  /* ── Type ─────────────────────────────────────────────────────────────── */
+  --f-display: 'Cormorant Garamond', 'Times New Roman', serif;
+  --f-ui:      'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --f-script:  'Petit Formal Script', 'Cormorant Garamond', cursive;
+
+  --fs-hero:     clamp(3.4rem, 11vw, 12rem);
+  --fs-chapter:  clamp(2.6rem, 7.5vw, 8rem);
+  --fs-display:  clamp(2rem, 4.6vw, 4.6rem);
+  --fs-title:    clamp(1.6rem, 3vw, 3rem);
+  --fs-lead:     clamp(1.05rem, 1.35vw, 1.45rem);
+  --fs-body:     clamp(0.95rem, 1.02vw, 1.075rem);
+  --fs-small:    clamp(0.8rem, 0.85vw, 0.9rem);
+  --fs-meta:     clamp(0.62rem, 0.72vw, 0.75rem);
+
+  --lh-tight: 0.9;
+  --lh-snug:  1.12;
+  --lh-body:  1.68;
+
+  --tr-meta: 0.38em;
+  --tr-nav:  0.24em;
+
+  /* ── Space (8pt-derived, editorial scale) ─────────────────────────────── */
+  --s-1: 0.5rem;  --s-2: 1rem;   --s-3: 1.5rem;  --s-4: 2rem;
+  --s-5: 3rem;    --s-6: 4.5rem; --s-7: 6.5rem;  --s-8: 9rem;   --s-9: 13rem;
+  --gutter: clamp(1.25rem, 4.5vw, 6rem);
+  --measure: 34em;
+
+  /* ── Grid ─────────────────────────────────────────────────────────────── */
+  --cols: 12;
+  --col-gap: clamp(0.9rem, 1.6vw, 2rem);
+
+  /* ── Lines, radii, shadow ─────────────────────────────────────────────── */
+  --rule: 1px solid rgb(255 255 255 / 0.14);
+  --rule-gold: 1px solid rgb(var(--accent-rgb) / 0.42);
+  --r-sm: 2px;  --r-pill: 999px;
+  --shadow-plate: 0 40px 90px -30px rgb(0 0 0 / 0.75);
+  --shadow-bottle: 0 60px 120px -40px rgb(0 0 0 / 0.9);
+
+  /* ── Motion system (§51) ──────────────────────────────────────────────── */
+  --t-micro:     180ms;
+  --t-ui:        420ms;
+  --t-section:   900ms;
+  --t-cinematic: 1600ms;
+  --e-out:   cubic-bezier(0.22, 1, 0.36, 1);      /* expo-out               */
+  --e-power: cubic-bezier(0.16, 1, 0.3, 1);       /* power4-out             */
+  --e-inout: cubic-bezier(0.76, 0, 0.24, 1);
+  --e-cine:  cubic-bezier(0.65, 0.01, 0.05, 0.99);
+
+  /* ── Layers ───────────────────────────────────────────────────────────── */
+  --z-grain: 900; --z-nav: 800; --z-cursor: 1000; --z-loader: 1100;
+  --z-overlay: 850; --z-canvas: 1;
+}
+
+/* Reduced-motion: collapse the cinematic tier to near-instant (§40) */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --t-micro: 1ms; --t-ui: 1ms; --t-section: 1ms; --t-cinematic: 1ms;
+  }
+}

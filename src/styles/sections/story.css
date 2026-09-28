@@ -1,0 +1,285 @@
+/* =============================================================================
+   STORY CHAPTERS — hero, epigraph, history, timeline, about, terroir, estate
+   Each chapter has a deliberately different spatial language (§11, §48).
+   ========================================================================== */
+
+/* ── 01 · HERO — cinematic 1886 photograph, WebGL depth push ───────────────── */
+.hero {
+  position: relative; height: 100svh; min-height: 620px;
+  display: grid; place-items: center; overflow: hidden;
+  background: var(--atm-hero);
+}
+.hero__canvas { position: absolute; inset: 0; z-index: 0; }
+.hero__canvas canvas { width: 100% !important; height: 100% !important; }
+/* CSS fallback used when WebGL is unavailable (§79) */
+.hero__fallback {
+  position: absolute; inset: -6%; z-index: 0;
+  background: url('../../../assets/img/heritage/imperial-vineyards-1886-workers.webp') center/cover no-repeat;
+  filter: grayscale(1) contrast(1.08) brightness(0.62);
+  display: none;
+}
+.no-webgl .hero__fallback { display: block; }
+
+.hero__scrim {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(120% 90% at 50% 30%, transparent 20%, rgb(12 10 11 / 0.5) 62%, rgb(12 10 11 / 0.92) 100%),
+    linear-gradient(to bottom, rgb(12 10 11 / 0.55) 0%, transparent 28%, transparent 55%, rgb(12 10 11 / 0.9) 100%);
+}
+.hero__content {
+  position: relative; z-index: 2; text-align: center;
+  display: grid; justify-items: center; gap: clamp(1rem, 2.5vh, 2rem);
+  padding-inline: var(--gutter);
+}
+.hero__mark { width: clamp(74px, 9vw, 128px); }
+.hero__mark img { width: 100%; filter: drop-shadow(0 10px 40px rgb(0 0 0 / 0.6)); }
+
+.hero__wordmark {
+  font-size: clamp(2rem, 6.6vw, 6rem);
+  letter-spacing: 0.4em; text-indent: 0.4em;
+  font-family: var(--f-ui); font-weight: 300; color: var(--parchment);
+}
+/* The wordmark is filled with the brochure's own brushed gold leaf (page 1). */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .hero__wordmark {
+    background-image:
+      linear-gradient(180deg, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.1)),
+      url('../../../assets/img/brand/gold-leaf-texture.webp');
+    background-size: cover, 140% 140%;
+    background-position: center, center;
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 6px 30px rgb(0 0 0 / 0.6));
+  }
+}
+.hero__tagline {
+  font-family: var(--f-script);
+  font-size: clamp(2.4rem, 8vw, 7rem);
+  color: var(--ivory); line-height: 1;
+  text-shadow: 0 8px 60px rgb(0 0 0 / 0.7);
+}
+.hero__meta {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: clamp(0.8rem, 2.4vw, 2.2rem);
+  font-size: var(--fs-meta); letter-spacing: var(--tr-meta); text-transform: uppercase;
+  color: rgb(241 236 226 / 0.65);
+}
+.hero__meta i { width: 4px; height: 4px; background: var(--emporia-gold); border-radius: 50%; }
+.hero__foot {
+  position: absolute; z-index: 2; bottom: clamp(1.4rem, 4vh, 3rem);
+  left: 0; right: 0; padding-inline: var(--gutter);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-3);
+}
+.hero__caption {
+  max-width: 30ch; font-size: var(--fs-meta); line-height: 1.7;
+  letter-spacing: 0.1em; color: rgb(241 236 226 / 0.45); text-transform: uppercase;
+}
+
+/* ── 02 · EPIGRAPH — the Andrić quote, black room, per-character reveal ───── */
+.epigraph {
+  background: var(--imperial-black);
+  padding-block: clamp(6rem, 20vh, 16rem);
+  position: relative; overflow: hidden;
+}
+.epigraph__q {
+  font-family: var(--f-display); font-weight: 300;
+  font-size: clamp(1.5rem, 3.6vw, 3.6rem); line-height: 1.28;
+  letter-spacing: -0.012em; color: var(--ivory);
+  max-width: 22ch; margin-inline: auto; text-align: center; text-wrap: balance;
+}
+.epigraph__attr {
+  margin-top: var(--s-4); text-align: center;
+  font-size: var(--fs-small); font-style: italic;
+  color: rgb(241 236 226 / 0.5);
+}
+.epigraph__glow {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  width: min(90vw, 900px); aspect-ratio: 1;
+  background: radial-gradient(circle, rgb(187 147 80 / 0.13), transparent 62%);
+  pointer-events: none;
+}
+
+/* ── 03 · HISTORY — pinned portrait, scrolling column, oversized folio ────── */
+.history { background: var(--atm-history); padding-block: 0; }
+.history__inner { display: grid; grid-template-columns: 1fr 1fr; align-items: start; }
+.history__media {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+}
+.history__media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 42% center;
+  filter: grayscale(1) contrast(1.06);
+  will-change: transform;
+}
+.history__media::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent 55%, rgb(20 16 15 / 0.95));
+}
+.history__year {
+  position: absolute; z-index: 2; left: clamp(1rem, 3vw, 3rem); bottom: clamp(1rem, 4vh, 3rem);
+  font-family: var(--f-display); font-weight: 300;
+  font-size: clamp(4rem, 12vw, 11rem); line-height: 0.82;
+  color: rgb(241 236 226 / 0.14);
+  letter-spacing: -0.03em;
+}
+.history__col { padding: clamp(5rem, 14vh, 11rem) var(--gutter) clamp(5rem, 14vh, 11rem) clamp(2rem, 5vw, 5rem); }
+.history__col h2 {
+  font-family: var(--f-ui); font-weight: 200;
+  font-size: clamp(2.4rem, 5.4vw, 5.2rem); letter-spacing: 0.02em;
+  color: var(--ivory); margin-bottom: var(--s-4);
+}
+.history__col .t-body { max-width: 40em; }
+.history__col p { font-size: clamp(0.95rem, 1.04vw, 1.08rem); }
+.history__col p:first-of-type::first-letter {
+  float: left; font-family: var(--f-display); font-size: 4.1em; line-height: 0.78;
+  padding: 0.06em 0.12em 0 0; color: var(--emporia-gold); font-weight: 400;
+}
+
+/* ── 04 · TIMELINE — vertical scroll converted to horizontal (§30) ─────────
+   initTimeline() gives the section extra height; the viewport sticks to the
+   top of the screen for the whole of it, so the page holds still vertically
+   while the track travels sideways. `overflow` must NOT sit on the section
+   itself — an overflow ancestor cancels position:sticky, which is why the
+   page used to keep scrolling past this chapter. */
+.timeline { position: relative; background: var(--imperial-black); }
+.timeline__viewport {
+  position: sticky; top: 0;
+  height: 100svh; display: flex; align-items: center;
+  overflow: hidden;
+}
+.timeline__track {
+  display: flex; align-items: center; gap: clamp(2.5rem, 6vw, 7rem);
+  padding-inline: var(--gutter); will-change: transform;
+}
+.timeline__intro { flex: 0 0 auto; width: min(78vw, 30rem); }
+.timeline__intro h2 { color: var(--ivory); }
+.timeline__entry {
+  flex: 0 0 auto; width: min(80vw, 26rem);
+  border-top: var(--rule-gold); padding-top: var(--s-3);
+}
+.timeline__entry b {
+  display: block; font-family: var(--f-display); font-weight: 300;
+  font-size: clamp(3.6rem, 9vw, 8rem); line-height: 0.86;
+  color: var(--emporia-gold); letter-spacing: -0.03em;
+}
+.timeline__entry h3 {
+  font-size: var(--fs-small); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ivory); margin: var(--s-2) 0 var(--s-1); font-weight: 500;
+}
+.timeline__entry p { font-size: var(--fs-small); color: rgb(241 236 226 / 0.62); }
+.timeline__entry:nth-child(even) { transform: translateY(clamp(1.5rem, 7vh, 5.5rem)); }
+.timeline__rail {
+  position: absolute; left: 0; right: 0; bottom: clamp(2rem, 8vh, 5rem);
+  height: 1px; background: rgb(255 255 255 / 0.1); z-index: 2;
+}
+.timeline__rail i { display: block; height: 100%; background: var(--emporia-gold); width: 0; }
+/* Reduced motion never pins: the chapter is swiped through by hand instead. */
+.reduced-motion .timeline__viewport { overflow-x: auto; overscroll-behavior-x: contain; }
+
+/* ── 05 · ABOUT US — the silhouette, negative space, offset column ────────── */
+.about {
+  background: linear-gradient(105deg, var(--paper-grey) 0% 22%, #8E9093 100%);
+  color: var(--imperial-black); position: relative; overflow: hidden;
+  min-height: 100svh; display: flex; align-items: center;
+}
+.about__sil {
+  position: absolute; left: clamp(-9rem, -6vw, -2rem); bottom: -2%;
+  height: min(112%, 108svh); width: auto; z-index: 1;
+  filter: drop-shadow(0 30px 80px rgb(0 0 0 / 0.32));
+  will-change: transform;
+}
+.about__inner { position: relative; z-index: 2; margin-left: auto; width: min(100%, 62rem); padding-block: var(--s-7) var(--s-8); }
+.about h2 {
+  font-family: var(--f-ui); font-weight: 200;
+  font-size: clamp(2.4rem, 6vw, 5.6rem); text-align: right;
+  color: var(--ivory); letter-spacing: 0.02em; margin-bottom: var(--s-4);
+}
+.about__lead { font-size: var(--fs-lead); color: rgb(23 20 21 / 0.86); max-width: 46em; }
+.about__body { margin-top: var(--s-3); }
+.about__body p {
+  color: rgb(23 20 21 / 0.78); max-width: 44em; margin-left: auto;
+  padding-left: calc(var(--i, 0) * clamp(0.6rem, 1.6vw, 2.2rem));
+}
+.about__logo { margin-top: var(--s-5); margin-left: auto; width: clamp(110px, 12vw, 160px); }
+.about__logo img { width: 100%; filter: brightness(0) invert(1) opacity(0.92); }
+
+/* ── 06 · TERROIR — vineyard parallax layers + WebGL grape field ──────────── */
+.terroir { position: relative; background: var(--atm-terroir); overflow: hidden; }
+.terroir__stage { position: relative; height: 160svh; }
+.terroir__sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.terroir__layer { position: absolute; inset: -8%; will-change: transform; }
+.terroir__layer img { width: 100%; height: 100%; object-fit: cover; }
+.terroir__layer--far   { filter: brightness(0.42) saturate(0.7) blur(2px); }
+.terroir__layer--mid   { filter: brightness(0.66) saturate(0.92); }
+.terroir__layer--near  { filter: brightness(0.9); }
+.terroir__layer--near  { clip-path: polygon(0 62%, 100% 48%, 100% 100%, 0 100%); }
+.terroir__canvas { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.terroir__scrim {
+  position: absolute; inset: 0; z-index: 4;
+  background: linear-gradient(to bottom, rgb(18 23 15 / 0.72), transparent 45%, rgb(12 10 11 / 0.88));
+}
+.terroir__content {
+  position: absolute; inset: 0; z-index: 5; display: grid; align-content: center;
+  padding: 0 var(--gutter); gap: var(--s-4);
+}
+.terroir__figs { display: flex; flex-wrap: wrap; gap: clamp(2rem, 6vw, 7rem); }
+.terroir__fig { max-width: 22rem; }
+.terroir__fig b {
+  display: flex; align-items: baseline; gap: 0.3rem;
+  font-family: var(--f-display); font-weight: 300;
+  font-size: clamp(3.6rem, 10vw, 9rem); line-height: 0.86;
+  color: var(--ivory); letter-spacing: -0.035em;
+}
+.terroir__fig b em {
+  font-family: var(--f-ui); font-style: normal; font-size: var(--fs-meta);
+  letter-spacing: var(--tr-meta); color: var(--emporia-gold); text-transform: uppercase;
+}
+.terroir__fig p { margin-top: var(--s-2); font-size: var(--fs-small); color: rgb(241 236 226 / 0.7); }
+.terroir__note {
+  max-width: 44em; font-size: var(--fs-small);
+  color: rgb(241 236 226 / 0.55); border-left: var(--rule-gold); padding-left: var(--s-3);
+}
+
+/* ── 07 · ESTATE — asymmetric editorial gallery, drag rail on desktop ─────── */
+.estate { background: var(--atm-estate); padding-block: var(--s-8); }
+.estate__head {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+  gap: var(--s-3); margin-bottom: var(--s-6);
+}
+.estate__head h2 { color: var(--ivory); }
+.estate__hint { font-size: var(--fs-meta); letter-spacing: var(--tr-meta); text-transform: uppercase; color: rgb(255 255 255 / 0.38); }
+.estate__rail {
+  display: flex; gap: clamp(1rem, 2.4vw, 2.6rem);
+  padding-inline: var(--gutter); cursor: grab;
+  overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity;
+}
+.estate__rail::-webkit-scrollbar { display: none; }
+.estate__rail.is-dragging { cursor: grabbing; }
+.estate__plate { flex: 0 0 auto; scroll-snap-align: center; position: relative; overflow: hidden; }
+.estate__plate img { transition: transform 1400ms var(--e-power), filter 800ms var(--e-out); }
+.estate__plate:hover img { transform: scale(1.055); }
+.estate__plate:nth-child(1) { width: min(84vw, 46rem); aspect-ratio: 4/3; }
+.estate__plate:nth-child(2) { width: min(64vw, 30rem); aspect-ratio: 3/4; align-self: flex-end; }
+.estate__plate:nth-child(3) { width: min(74vw, 38rem); aspect-ratio: 1/1; }
+.estate__plate:nth-child(4) { width: min(64vw, 32rem); aspect-ratio: 3/4; }
+.estate__plate:nth-child(5) { width: min(88vw, 50rem); aspect-ratio: 16/10; align-self: flex-end; }
+.estate__plate:nth-child(6) { width: min(70vw, 34rem); aspect-ratio: 4/5; }
+/* A closing plate for the estate chapter: the vines themselves, full width. */
+.estate__coda {
+  margin-top: var(--s-6); aspect-ratio: 21/7; overflow: hidden;
+}
+.estate__coda img { width: 100%; height: 100%; object-fit: cover; }
+
+.estate__hotel {
+  margin-top: var(--s-6); text-align: center;
+}
+.estate__hotel span {
+  display: inline-block;
+  font-size: clamp(1.1rem, 2.6vw, 2.2rem); letter-spacing: 0.44em; text-indent: 0.44em;
+  color: var(--ivory); font-weight: 200;
+}
+.estate__hotel small {
+  display: block; margin-top: 0.6rem;
+  font-size: var(--fs-meta); letter-spacing: 0.5em; text-indent: 0.5em;
+  color: var(--emporia-gold);
+}

@@ -1,0 +1,179 @@
+/* =============================================================================
+   AWARDS · MAP · CONTACT · FOOTER
+   ========================================================================== */
+
+/* ── AWARDS — a dark hall, medals floating at different depths ────────────── */
+.awards { background: var(--atm-awards); position: relative; overflow: hidden; padding-block: var(--s-8); }
+.awards__canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.55; }
+.awards__head { position: relative; z-index: 2; margin-bottom: var(--s-7); max-width: 46rem; }
+.awards__head h2 { color: var(--ivory); }
+.awards__head p { margin-top: var(--s-3); color: rgb(241 236 226 / 0.62); }
+
+.awards__wall {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 4vw, 4.5rem);
+}
+.award {
+  display: grid; justify-items: center; text-align: center; gap: var(--s-2);
+  padding: var(--s-4) var(--s-2);
+}
+.award:nth-child(2) { transform: translateY(clamp(1.5rem, 6vh, 4.5rem)); }
+.award:nth-child(3) { transform: translateY(clamp(-1.5rem, -3vh, -0.5rem)); }
+.award__medal {
+  width: clamp(120px, 15vw, 210px); aspect-ratio: 1; position: relative;
+  filter: drop-shadow(0 30px 55px rgb(0 0 0 / 0.7));
+  transition: transform 900ms var(--e-power);
+  will-change: transform;
+}
+.award__medal img { width: 100%; }
+.award:hover .award__medal { transform: translateY(-10px) rotateY(14deg) rotateZ(-5deg); }
+.award__year {
+  font-family: var(--f-display); font-size: clamp(1.6rem, 2.6vw, 2.6rem);
+  font-weight: 300; color: var(--emporia-gold); line-height: 1;
+}
+.award__medalname {
+  font-size: var(--fs-meta); letter-spacing: var(--tr-meta); text-transform: uppercase;
+  color: var(--ivory);
+}
+.award__comp { font-family: var(--f-display); font-size: clamp(1.15rem, 1.7vw, 1.6rem); color: var(--ivory); }
+.award__series { font-size: var(--fs-meta); letter-spacing: 0.2em; text-transform: uppercase; color: rgb(255 255 255 / 0.45); }
+.award__wine {
+  margin-top: 0.3rem; font-size: var(--fs-small); color: rgb(241 236 226 / 0.72);
+  border-top: 1px solid rgb(var(--accent-rgb) / 0.35); padding-top: 0.6rem;
+}
+
+/* ── Historic honours — a typographic ledger, not medals ──────────────────── */
+.awards__historic { position: relative; z-index: 2; margin-top: var(--s-8); }
+.awards__historic h3 {
+  font-size: var(--fs-meta); letter-spacing: var(--tr-meta); text-transform: uppercase;
+  color: var(--emporia-gold); margin-bottom: var(--s-4);
+}
+.honour {
+  display: grid; grid-template-columns: minmax(0, 0.34fr) minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 3rem); align-items: start;
+  padding: var(--s-4) 0; border-top: var(--rule);
+}
+.honour b {
+  font-family: var(--f-display); font-weight: 300;
+  font-size: clamp(2.6rem, 6vw, 5.6rem); line-height: 0.9;
+  color: var(--ivory); letter-spacing: -0.03em;
+}
+.honour__medal { font-family: var(--f-display); font-size: clamp(1.2rem, 2.2vw, 2rem); color: var(--emporia-gold); }
+.honour__where { font-size: var(--fs-meta); letter-spacing: var(--tr-meta); text-transform: uppercase; color: rgb(255 255 255 / 0.5); margin-top: 0.4rem; }
+.honour p { margin-top: var(--s-2); font-size: var(--fs-small); color: rgb(241 236 226 / 0.68); max-width: 44em; }
+
+.awards__cities {
+  position: relative; z-index: 2; margin-top: var(--s-6);
+  border-top: var(--rule); padding-top: var(--s-4);
+}
+.awards__cities p { color: rgb(241 236 226 / 0.62); max-width: 46em; }
+.awards__cities ul { display: flex; flex-wrap: wrap; gap: clamp(1.4rem, 5vw, 5rem); margin-top: var(--s-4); }
+.awards__cities li {
+  font-family: var(--f-display); font-weight: 300;
+  font-size: clamp(1.5rem, 4.4vw, 4rem); color: rgb(241 236 226 / 0.28);
+  letter-spacing: -0.02em; transition: color var(--t-ui) var(--e-out);
+}
+.awards__cities li:hover { color: var(--emporia-gold); }
+
+/* ── IMPERIAL MAP — Vienna to Mostar ─────────────────────────────────────── */
+.geo { position: relative; background: var(--imperial-black); overflow: hidden; }
+.geo__stage { position: relative; min-height: 100svh; display: grid; }
+.geo__map { position: absolute; inset: 0; }
+.geo__map img { width: 100%; height: 100%; object-fit: cover; object-position: 62% center; }
+/* The map is a dense engraving with its own printed place names, so the
+   reading column needs a real shadow to sit in rather than a light veil —
+   otherwise the site's own type competes with the map's. */
+.geo__map::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(97deg,
+      rgb(14 12 12 / 0.985) 0%,
+      rgb(14 12 12 / 0.95) 30%,
+      rgb(14 12 12 / 0.72) 44%,
+      rgb(14 12 12 / 0.15) 62%,
+      transparent 78%),
+    linear-gradient(to bottom, rgb(14 12 12 / 0.55), transparent 30%, rgb(14 12 12 / 0.5));
+}
+.geo__svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.geo__route {
+  fill: none; stroke: var(--emporia-gold); stroke-width: 2.2; stroke-linecap: round;
+  stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
+  filter: drop-shadow(0 0 8px rgb(187 147 80 / 0.7));
+}
+.geo__pin { fill: var(--emporia-gold); opacity: 0; }
+.geo__pin-ring { fill: none; stroke: var(--emporia-gold); stroke-width: 1.4; opacity: 0; }
+.geo__content {
+  position: relative; z-index: 2; align-self: center;
+  padding: var(--s-8) var(--gutter); max-width: 42rem;
+}
+.geo__content .plate {
+  border: 1px solid rgb(255 255 255 / 0.12);
+  box-shadow: var(--shadow-plate);
+  filter: saturate(0.94) brightness(0.94);
+}
+.geo__content h2 { color: var(--ivory); }
+.geo__cap {
+  /* The engraving carries this line in its own lettering; ours sits above the
+     headline, on the dark, so the two never sit on top of one another. */
+  margin: 0.6rem 0 var(--s-3); font-size: var(--fs-meta);
+  letter-spacing: var(--tr-meta); text-transform: uppercase; color: var(--emporia-gold);
+}
+.geo__leg { margin-top: var(--s-4); display: grid; gap: var(--s-2); }
+.geo__leg div { display: flex; align-items: baseline; gap: 0.9rem; font-size: var(--fs-small); color: rgb(241 236 226 / 0.72); }
+.geo__leg i { width: 7px; height: 7px; border-radius: 50%; background: var(--emporia-gold); flex: 0 0 auto; }
+
+/* ── CONTACT — the cellar door closes ────────────────────────────────────── */
+.contact { background: var(--atm-contact); position: relative; overflow: hidden; padding-block: var(--s-8); }
+.contact__glow {
+  position: absolute; left: 50%; top: 12%; translate: -50% 0;
+  width: min(120vw, 1100px); aspect-ratio: 1.4;
+  background: radial-gradient(ellipse at center, rgb(187 147 80 / 0.1), transparent 62%);
+  pointer-events: none;
+}
+.contact__inner { position: relative; z-index: 2; display: grid; justify-items: center; gap: var(--s-5); text-align: center; }
+.contact__logo { width: clamp(140px, 17vw, 250px); }
+.contact__logo img { width: 100%; }
+.contact__city {
+  font-family: var(--f-display); font-weight: 300;
+  font-size: clamp(3rem, 11vw, 9.5rem); line-height: 0.9;
+  color: rgb(241 236 226 / 0.1); letter-spacing: -0.04em;
+}
+.contact__card { display: grid; gap: 0.55rem; font-size: var(--fs-lead); }
+.contact__card b { font-size: clamp(1.1rem, 1.8vw, 1.5rem); color: var(--ivory); font-weight: 500; }
+.contact__card span { color: rgb(241 236 226 / 0.72); font-size: var(--fs-body); }
+.contact__links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-2) var(--s-5); margin-top: var(--s-3); }
+.contact__links a {
+  position: relative; font-size: var(--fs-body); color: var(--ivory);
+  padding-bottom: 0.3rem;
+}
+.contact__links a::after {
+  content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 1px;
+  background: var(--emporia-gold); transform: scaleX(0); transform-origin: right;
+  transition: transform var(--t-ui) var(--e-power);
+}
+.contact__links a:hover::after { transform: scaleX(1); transform-origin: left; }
+.contact__qr { width: clamp(84px, 9vw, 118px); opacity: 0.85; }
+.contact__qr img { width: 100%; }
+
+/* ── FOOTER ──────────────────────────────────────────────────────────────── */
+.foot {
+  background: var(--deep-black); border-top: var(--rule);
+  padding: var(--s-5) 0 var(--s-4);
+}
+.foot__grid {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-4) var(--col-gap);
+}
+.foot h3 {
+  font-size: var(--fs-meta); letter-spacing: var(--tr-meta); text-transform: uppercase;
+  color: var(--emporia-gold); margin-bottom: var(--s-2); font-weight: 600;
+}
+.foot li, .foot p { font-size: var(--fs-small); color: rgb(241 236 226 / 0.62); line-height: 1.85; }
+.foot a:hover { color: var(--ivory); }
+.foot__bottom {
+  margin-top: var(--s-5); padding-top: var(--s-3); border-top: var(--rule);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-2);
+  font-size: var(--fs-meta); letter-spacing: 0.12em; color: rgb(241 236 226 / 0.4);
+  text-transform: uppercase;
+}

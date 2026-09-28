@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0C0A0B">
+<meta name="color-scheme" content="dark">
+
+<title>EMPORIA — Vinarija Carski Vinogradi, Mostar · Imperial Vineyards since 1886</title>
+<meta name="description" content="Emporia, the wines of Vinarija Carski Vinogradi in Mostar. Founded in 1886 as the Imperial Vineyards of Franz Joseph I, producing Žilavka, Blatina, Vranac, Rosé Saumon, cuvées and spirits from Herzegovina.">
+<link rel="canonical" href="https://www.emporia.ba/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="EMPORIA — Carski Vinogradi">
+<meta property="og:title" content="EMPORIA — Imperial Vineyards, Mostar, since 1886">
+<meta property="og:description" content="“Für eigene Bedürfnisse!” — the wines of the Imperial Vineyards at Gnojnice near Mostar: Žilavka, Blatina, Vranac, Rosé Saumon, White Mist and Deep Red cuvées, and the house spirits.">
+<meta property="og:url" content="https://www.emporia.ba/">
+<meta property="og:image" content="https://www.emporia.ba/assets/img/heritage/imperial-vineyards-1886-workers.webp">
+<meta property="og:image:alt" content="Historic photograph of workers tending the young vines of the Imperial Vineyards near Mostar">
+<meta property="og:locale" content="en_GB">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EMPORIA — Imperial Vineyards, Mostar, since 1886">
+<meta name="twitter:description" content="The wines of Vinarija Carski Vinogradi, Mostarsko vinogorje, Bosnia and Herzegovina.">
+<meta name="twitter:image" content="https://www.emporia.ba/assets/img/heritage/imperial-vineyards-1886-workers.webp">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+
+<!-- Fonts: self-hosted, woff2, latin + latin-ext (č ć š ž đ) -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/jost-latin-300-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/cormorant-garamond-latin-300-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/petit-formal-script-latin-400-normal.woff2" crossorigin>
+<link rel="stylesheet" href="src/styles/fonts.css">
+
+<link rel="preload" as="image" href="assets/img/heritage/imperial-vineyards-1886-workers.webp" fetchpriority="high">
+
+<link rel="stylesheet" href="src/styles/tokens.css">
+<link rel="stylesheet" href="src/styles/base.css">
+<link rel="stylesheet" href="src/styles/sections/shell.css">
+<link rel="stylesheet" href="src/styles/sections/story.css">
+<link rel="stylesheet" href="src/styles/sections/wines.css">
+<link rel="stylesheet" href="src/styles/sections/closing.css">
+<link rel="stylesheet" href="src/styles/responsive.css">
+
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ── Loader ────────────────────────────────────────────────────────────── -->
+<div class="loader" role="status" aria-live="polite" aria-label="Loading Emporia">
+  <div class="loader__inner">
+    <div class="loader__drop">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+          <clipPath id="dropClip"><circle cx="50" cy="50" r="42"/></clipPath>
+        </defs>
+        <circle class="loader__ring" cx="50" cy="50" r="46"/>
+        <g clip-path="url(#dropClip)">
+          <rect class="loader__fill" x="0" y="0" width="100" height="100"
+                fill="url(#wineGrad)" style="transform:scaleY(0)"/>
+        </g>
+        <defs>
+          <linearGradient id="wineGrad" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#4A0F1E"/>
+            <stop offset="100%" stop-color="#7E2036"/>
+          </linearGradient>
+        </defs>
+        <circle class="loader__arc" cx="50" cy="50" r="46"
+                data-len="289" stroke-dasharray="289" stroke-dashoffset="289"/>
+      </svg>
+      <div class="loader__mark">
+        <img src="assets/img/brand/emporia-logo-mark.webp" alt="" width="120" height="112">
+      </div>
+    </div>
+    <p class="loader__meta">
+      <span class="loader__pct">00</span>
+      <span class="loader__word"><span>Imperial Vineyards — Mostar</span></span>
+    </p>
+  </div>
+</div>
+<div class="loader__flood" aria-hidden="true"></div>
+
+<!-- ── Chrome ────────────────────────────────────────────────────────────── -->
+<div class="grain" aria-hidden="true"></div>
+
+<div class="cursor" aria-hidden="true">
+  <div class="cursor__ring"><span class="cursor__label"></span></div>
+  <div class="cursor__dot"></div>
+</div>
+
+<header class="nav">
+  <a class="nav__brand" href="#top" aria-label="Emporia — back to top">
+    <img src="assets/img/brand/emporia-logo-mark.webp" alt="" width="42" height="39">
+    <span>EMPORIA</span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a class="nav__link" href="#history">History</a>
+    <a class="nav__link" href="#about">About Us</a>
+    <a class="nav__link" href="#terroir">Terroir</a>
+    <a class="nav__link" href="#estate">Estate</a>
+    <a class="nav__link" href="#wines">Wines</a>
+    <a class="nav__link" href="#spirits">Spirits</a>
+    <a class="nav__link" href="#awards">Awards</a>
+    <a class="nav__link" href="#contact">Contact</a>
+  </nav>
+  <button class="nav__toggle" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+    <i></i><i></i>
+  </button>
+</header>
+
+<nav class="menu" id="menu" aria-hidden="true" aria-label="Full index">
+  <p class="t-meta">Index</p>
+  <ul class="menu__list">
+    <li class="menu__item"><a href="#history"   style="--d:60ms"><em>02</em>History</a></li>
+    <li class="menu__item"><a href="#timeline"  style="--d:110ms"><em>—</em>Timeline</a></li>
+    <li class="menu__item"><a href="#about"     style="--d:160ms"><em>03</em>About Us</a></li>
+    <li class="menu__item"><a href="#terroir"   style="--d:210ms"><em>02</em>Terroir</a></li>
+    <li class="menu__item"><a href="#estate"    style="--d:260ms"><em>04–05</em>Estate</a></li>
+    <li class="menu__item"><a href="#wines"     style="--d:310ms"><em>06–14</em>Wines</a></li>
+    <li class="menu__item"><a href="#spirits"   style="--d:360ms"><em>15</em>Spirits</a></li>
+    <li class="menu__item"><a href="#awards"    style="--d:410ms"><em>—</em>Awards</a></li>
+    <li class="menu__item"><a href="#geography" style="--d:460ms"><em>16</em>Geography</a></li>
+    <li class="menu__item"><a href="#contact"   style="--d:510ms"><em>16</em>Contact</a></li>
+  </ul>
+  <div class="menu__foot">
+    <span>Vinarija CARSKI VINOGRADI · Mostarsko vinogorje</span>
+    <span>Bišće Polje bb, 88000 Mostar</span>
+    <a href="mailto:emporia@carskivinogradi.com">emporia@carskivinogradi.com</a>
+    <a href="tel:+38763345097">+387 63 345 097</a>
+  </div>
+</nav>
+
+<nav class="rail" aria-label="Chapter progress"></nav>
+
+<main id="app" role="main"></main>
+
+<noscript>
+  <div style="padding:6rem 1.5rem;max-width:44rem;margin:0 auto">
+    <h1 style="font-family:Georgia,serif;font-weight:300">EMPORIA — Imperial Vineyards, Mostar</h1>
+    <p style="margin-top:1rem;line-height:1.7">This site presents the Emporia brochure as an interactive experience and needs JavaScript to assemble its chapters. Every word of the brochure is available without it at <a href="content.html" style="color:#BB9350">the plain-text edition</a>.</p>
+    <p style="margin-top:1rem;line-height:1.7">HP INVESTING d.o.o., Mostar · Vinarija CARSKI VINOGRADI · Mostarsko vinogorje · Bišće Polje bb, 88000 Mostar, Bosna i Hercegovina · <a href="tel:+38763345097" style="color:#BB9350">+387 63 345 097</a> · <a href="mailto:emporia@carskivinogradi.com" style="color:#BB9350">emporia@carskivinogradi.com</a></p>
+  </div>
+</noscript>
+
+<script type="module" src="src/js/main.js"></script>
+
+<!-- ── Structured data — only fields the brochure actually supports ──────── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.emporia.ba/#website",
+      "url": "https://www.emporia.ba/",
+      "name": "EMPORIA — Vinarija Carski Vinogradi",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://www.emporia.ba/#winery" }
+    },
+    {
+      "@type": ["Winery", "LocalBusiness", "Organization"],
+      "@id": "https://www.emporia.ba/#winery",
+      "name": "Vinarija CARSKI VINOGRADI",
+      "alternateName": ["Imperial Vineyards Winery Mostar", "Carski vinogradi", "EMPORIA"],
+      "legalName": "HP INVESTING d.o.o.",
+      "foundingDate": "1886",
+      "url": "https://www.emporia.ba/",
+      "email": "emporia@carskivinogradi.com",
+      "telephone": "+387 63 345 097",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bišće Polje bb",
+        "postalCode": "88000",
+        "addressLocality": "Mostar",
+        "addressCountry": "BA"
+      },
+      "areaServed": "Mostarsko vinogorje"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "History",   "item": "https://www.emporia.ba/#history" },
+        { "@type": "ListItem", "position": 2, "name": "About Us",  "item": "https://www.emporia.ba/#about" },
+        { "@type": "ListItem", "position": 3, "name": "Terroir",   "item": "https://www.emporia.ba/#terroir" },
+        { "@type": "ListItem", "position": 4, "name": "Estate",    "item": "https://www.emporia.ba/#estate" },
+        { "@type": "ListItem", "position": 5, "name": "Wines",     "item": "https://www.emporia.ba/#wines" },
+        { "@type": "ListItem", "position": 6, "name": "Spirits",   "item": "https://www.emporia.ba/#spirits" },
+        { "@type": "ListItem", "position": 7, "name": "Awards",    "item": "https://www.emporia.ba/#awards" },
+        { "@type": "ListItem", "position": 8, "name": "Contact",   "item": "https://www.emporia.ba/#contact" }
+      ]
+    }
+  ]
+}
+</script>
+<script type="application/ld+json" id="products-ld">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#emporia-zilavka",
+      "name": "EMPORIA Žilavka",
+      "category": "Premium wine",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/emporia-zilavka-bottle.webp",
+      "description": "In the stone land of sunny Herzegovina, on the blessed ground soaked with wild river Neretva and sweat of winemakers, sumptuous wine Žilavka was born. Those who deal with the production of this liquid gold are rewarded generously. Upright and defiant, this wine has taken on all the characteristics of the area it originated from. That’s why it puts up with periods of long droughts just as well as with periods of heavy autumn rain typical of this area. This characteristic southern wine with a specific scent , crystal clear greenish-yellow colour and exceptional strength has easily found its place at the top of the wine world. Bosnian ban Tvrtko enjoyed its distinctive taste in 1353, and Ivo Andrić, a Nobel Prize Winner, was inspired by Žilavka from Imperial Vineyards to write the most beautiful thoughts about wine. Big names changed, people came and passed by, and Herzegovinian rubble stood proudly and always captured the beauty of its fruits.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Premium wine"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "95% Žilavka, 5% Bena"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "12%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "10-12°C"
+        }
+      ],
+      "award": [
+        "BRONZE, Decanter WORLD WINE AWARDS 2017"
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#emporia-blatina",
+      "name": "EMPORIA Blatina",
+      "category": "Premium wine",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/emporia-blatina-bottle.webp",
+      "description": "“Beware of its strength!” those are the words every wine expert will warn you with after the first sip. You will be mesmerized by its soft and gentle beauty and make you always want to come back for more of that feeling it awakes in you. The craddle of this variety is Mostar vineyards, and if this lady was transferred to some other place in the world, it would become a pale copy of itself. Simply, nowhere in the world could you produce wine of such fullness and harmony of taste, wine with a seal of Herzegovina, one that is remembered and retold, except the earth it has sprouted from. Since it’s a “female flower”, it sometimes has unfruitful years, but already in the next vintage it gives wine that is able to fulfill desires of the finest wine elite. Not only irregular harvest enlarge the quality of wine, but it also makes a rare pearl, one of the most beautiful ones. Coloured ruby red, it’s best after aging for a couple of years in wooden barrels.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Premium wine"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "85% Blatina, 10% Alicante Bouschet, 5% Vranac"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "12%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "18-20°C"
+        }
+      ],
+      "award": [
+        "BRONZE, Decanter WORLD WINE AWARDS 2017"
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#zilavka-limited-edition",
+      "name": "Žilavka LIMITED EDITION",
+      "category": "Premium wine",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/zilavka-limited-edition-bottle.webp",
+      "description": "Passionately shaped by flames, the inside of Slavonian and Bosnian oak barrels has perfectly preserved the taste of love, song and laugh, which are constantly inside every drop of this wine. Žilavka LIMITED EDITION has complex wine character and emphasized layers of flavours. Domestic oak and power of fire make the wine stronger and more serious, such that it is immensely easy to drink and love it. Žilavka’s way from vineyard to glass is more intense than any other wine. It’s the wine that will attract you at first sight with its straw gold colour, and then you will remember the sensual beauty of almonds, honey and vanilla that are in each of its phases. This wine delights with its unique ending.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Premium wine"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "Žilavka 100%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "12.5%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "10-12°C"
+        }
+      ],
+      "award": [
+        "SILVER, Decanter WORLD WINE AWARDS 2017"
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#blatina-limited-edition",
+      "name": "Blatina LIMITED EDITION",
+      "category": "Premium wine",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/blatina-limited-edition-bottle.webp",
+      "description": "In an embrace of fire and wood, the most sumptuous wine from the area of Herzegovina has become worthy of the finest wine elite. Grapes for Blatina LIMITED EDITION are hand-picked from the best positions in a vineyard. After long maceration in stainless steel barrels, wine continues to ripen in Slavonian and Bosnian barrique barrels from 6 to 12 months. It is followed by conjoining of wine in big, oak barrels. In order to be full in flavour, wine has to age in bottles for a while, but you can best feel all the charms of wine when it is served on a rich table. Carefully chosen grapes, aging in barrels which have unique scent and long stillness in bottles results in divine taste that stays in your mouth long after you put the glass away. Wine is adorned with a deep ruby red colour. It’s got a complex scent with noticable taste of berries. It’s an elegant, soft and drinkable wine with long and nice ending. It is recommended to be served in a decanter, 30 to 45 minutes before the consumption.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Premium wine"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "Blatina 90%, Alicante Bouschet 10%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "13%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "16-18°C"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#emporia-vranac",
+      "name": "EMPORIA Vranac",
+      "category": "Premium wine",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/emporia-vranac-bottle.webp",
+      "description": "This full bodied, warm climate wine is made of 100% Vranac, indigenous grape of Herzegovina region. Young wine is aged in Slavonian oak barrels to accentuate notes of cinnamon, chocolate, dark berries and licorice. It is heavenly paired with grilled meat, game and steak.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Premium wine"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "100% Vranac"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "13,5%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "18 °C"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#emporia-rose-saumon",
+      "name": "EMPORIA ROSE SAUMON",
+      "category": "Premium Rose wine",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/emporia-rose-saumon-bottle.webp",
+      "description": "Gentle by color, gentle by taste that is simply what Emporia Saumon is. Color of Salmon with subtle taste of citrus  and underlying notes of mediterranean fruits. Emporia Saumon is based on grape sort pure Blatina and it is hand picked during early hours of the dawn from southern part of Imperial Vineyards, 15-20 days before main harvest in order to retain freshness and acidity levels of the grape. Fermetation takes place spontaneously in a stainless steel tank with very short maceration period of a few hours. Once it’s bottled, it is kept in a cellar for 4 months before being served.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Premium Rose wine"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "100% Blatina"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "13%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "10-12°C"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#white-mist-cuvee",
+      "name": "White Mist Cuvee",
+      "category": "Premium wine",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/white-mist-cuvee-bottle.webp",
+      "description": "White Mist Cuvee is a blend of autochthonous Žilavka from Herzegovina with three carefully selected international white varieties planted in the unique microclimate of Imperial Vineyards (Carski vinogradi). Blending of these varieties in synergism gives a unique wine with a recognizable Herzegovinian terroir. Chardonnay with its creamy taste and discreet aroma is carefully combined with Chenin Blanc, whose playful acids give freshness and durability. Pošip’s firm character with balanced aromas along with the minerality and fullness of Žilavka give the wine a perfect balance. By combining varieties in this ratio, we managed to produce something magical and unique, a wine with a very complex aroma and taste, a very long finish with a distinct mineral taste.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Premium wine"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "Chenin Blanc, Pošip, Chardonnay, Žilavka"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "13.9 %"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "10 - 12 °C"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#deep-red-cuvee",
+      "name": "Deep Red Cuvee",
+      "category": "Premium wine",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/deep-red-cuvee-bottle.webp",
+      "description": "Perfect microclimatic conditions in Carski Vinogradi with unique land are a guarantee for unique wines. Striving to perfect the wines, we felt the need to combine the best into one. Five of the best black grape varieties produced in Herzegovina make this wine unique. The deep ruby color, the aroma of ripe plums, forest fruits and vanilla awaken your palate at the very first encounter, the sumptuous tannins complete the harmonious and complex taste of this wine with a very long finish. Deep Red Cuvee is a powerful wine typical of Mediterranean regions, with high alcohol and very pleasant acids, perfect for long aging. In order to feel the best aromas, it is recommended to air it in a decanter for 30-40 minutes.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Premium wine"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "Cabernet.S., Syrah, Merlot, Trnjak, Vranac"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "14 %"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "17-18 °C"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#emporia-white-selection",
+      "name": "White Selection",
+      "category": "Premium wine",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/emporia-white-selection-bottle.webp",
+      "description": "Hand picking of carefully chosen grapes for EMPORIA WHITE SELECTION begins with the first rays of Herzegovinian sunlight. In order for grapes to keep the freshness of night, it is transported to the winery in refrigerator cars. The main part of fermentation takes place in stainless steel dishes with controlled cooling and selected yeasts. A way to a table is up to two years long, and includes aging in barrique barrels, stainless steel tanks and bottles. Wine colour is light yellow with greenish reflection, and smell is noble and complex with a hint of almonds and honey. The flavour is harmonius and complex, going down your throat in a way only characteristic of the best wines.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Premium wine"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "85% Žilavka, 10% Chardonnay + 5% Chenin Blanc"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "13%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "10-12°C"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#emporia-cherry",
+      "name": "EMPORIA Cherry",
+      "category": "Fruit liqueur",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/emporia-cherry-liqueur-bottle.webp",
+      "description": "EMPORIA CHERRY is a fruit liqueur produced from Marasca cherries. It is produced according to a long-kept recipe, respecting even the smallest details. In the heat of the Herzegovinian sun, the finest Marasca cherry berries are macerated in wine distillate in 50 l glass containers. After 3-4 months of maceration, the obtained macerate is additionally enriched with natural macerates of other fruits. By combining the macerate, the liqueur continues aging in wooden and stainless steel barrels for 12-18 months. It fits perfectly as a dessert drink, served chilled with the finest desserts.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Fruit liqueur"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "Maraska cherry"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "27%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "4-6 °C"
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://www.emporia.ba/#emporia-loza-specijal",
+      "name": "EMPORIA Loza Specijal",
+      "category": "Natural fruit brandy",
+      "brand": {
+        "@type": "Brand",
+        "name": "EMPORIA"
+      },
+      "manufacturer": {
+        "@id": "https://www.emporia.ba/#winery"
+      },
+      "image": "https://www.emporia.ba/assets/img/wines/emporia-loza-specijal-bottle.webp",
+      "description": "EMPORIA LOZA SPECIJAL is produced by careful distillation of young wine, which is distilled on modern distillation devices immediately before the first pour. During distillation, only the highest quality central part of the distillate is separated. The wine distillate obtained in this way is aged in stainless steel containers, retaining the original varietal aroma. It is traditionally served as an aperitif, stimulating the appetite before the meal.",
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Category",
+          "value": "Natural fruit brandy"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Varietal structure",
+          "value": "distillate of Žilavka, Blatina and Muscat Hamburg"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Alcohol content",
+          "value": "40%"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Serving temperature",
+          "value": "4-6 °C"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</body>
+</html>
